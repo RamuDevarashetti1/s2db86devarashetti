@@ -1,0 +1,14 @@
+block content
+    h1= title
+    -let results =[{dog_type: "Bull dog" ,dog_breed: "working" ,dog_height: 140},{dog_type:"German shepherd",dog_breed:"herding",dog_height:120},{dog_type:"American English Coonhound",dog_breed:"hound",dog_height:301}]
+    div(class="container-fluid")
+     div(class="column")
+        each dog,index in results 
+            div(class="col-sm-2" onclick=`buy(${index})`)  #{dog.dog_type}  
+            div(class="col-sm-2" onclick=`buy(${index})`)  #{dog.dog_breed}
+            div(class="col-sm-2" onclick=`buy(${index})`)  #{dog.dog_height}
+script.
+    function buy(n)
+    {
+        alert(`You have purchased item ${n+1}`);
+    }
