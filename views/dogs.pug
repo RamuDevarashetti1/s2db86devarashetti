@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  - let items = results
+  div(class="container-fluid")
+    div(class="row")
+      each dogs, index in items
+        div(class="col-sm-2" onclick=`buy(${index+1})`) #{dogs.dog_bread} - #{dogs.dog_color} - $#{dogs.dog_cost}
+  
+  script.
+    function buy(index){
+      alert(`You purchased item ${index}`);
+    }
