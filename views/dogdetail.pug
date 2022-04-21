@@ -1,0 +1,21 @@
+extends layout
+block content
+  h1= title
+  - let dogid = toShow._id
+  - let dogbread = toShow.dog_bread
+  - let dogcost = toShow.dog_cost
+  - let dogcolor = toShow.dog_color
+  div
+    table#pickle.table.table-hover.table-striped.table-bordered
+      thead
+          tr
+              th Dog ID
+              th Dog Bread
+              th Dog Color
+              th Dog Cost
+      tbody
+          tr
+              th(scope='row') 1
+              td #{dogbread}
+              td #{dogcolor}
+              td #{dogcost}

@@ -1,0 +1,38 @@
+extends layout
+block content
+  h1= title
+
+  - let dogid = toShow._id
+  - let dog_bread = toShow.dog_bread
+  - let dog_color = toShow.dog_color
+  - let dog_cost = toShow.dog_cost
+  div.row(class='mb-2')
+    div.mx-sm-5 ID is
+    div.mx-sm-5 #{dogid}
+  - let actionid = "/resource/dogs/" + dogid
+  form(id='dogForm', action= actionid, method="PUT")
+    div.form-group(class="mx-sm-5 mb-2")
+      label.dogAttr(for='dog_bread') Dog bread
+      input#dog_bread(type='text' name='dog_bread' class="form-control")
+    div.form-group(class="mx-sm-5 mb-2")
+      label.dogAttr(for='dog_color') Dog color
+      input#dog_color(type='text' name='dog_color' class="form-control")
+    div.form-group(class="mx-sm-5 mb-2")
+      label.dogAttr(for='dog_cost') Dog cost
+      input#dog_cost(type='number' name='dog_cost' class="form-control")
+    input(type="submit" class="mx-sm-5 mb-2 btn btn-success")
+
+  script.
+    document.forms['dogForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) 
+      }).then((resp) => {
+        return resp.json(); 
+      }).then((body) => {
+        alert("Update succeded")
+      }).catch((error) => {
+      alert("Update failed " + error )
+      });
+    });

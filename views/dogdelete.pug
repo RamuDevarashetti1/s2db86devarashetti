@@ -1,0 +1,51 @@
+extends layout
+block content
+    h1= title
+
+    if (toShow == null)
+        h3 No instance to delete
+    else
+        - let dogid = toShow._id
+        - let dogbread = toShow.dog_bread
+        - let dogcost = toShow.dog_cost
+        - let dogcolor = toShow.dog_color
+        - let actionid = "/resource/dogs/" + dogid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='dogAttr mr-3') Dog ID is:
+                div #{dogid}
+            div.row
+                div(class='dogAttr mr-3') Dog Bread is:
+                div #{dogbread}
+            div.row
+                div(class='dogAttr mr-3') Dog Color is:
+                div #{dogcolor}
+            div.row
+                div(class='dogAttr mr-3') Dog Cost is:
+                div #{dogcost}    
+
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+        function cancel() {
+            window.location.href='/dogs'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+                method: 'DELETE'
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/dogs'
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        }

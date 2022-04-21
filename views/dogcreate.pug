@@ -1,0 +1,28 @@
+extends layout
+block content
+  h1= title
+  form(id='DogForm', action="/resource/laptops", method="POST")
+    div.form-group(class="mx-sm-5 mb-2")
+      label.laptopAttr(for='dog_bread') Dog brand
+      input#dog_bread(type='text', name='dog_bread' class="form-control")
+    div.form-group(class="mx-sm-5 mb-2")
+      label.laptopAttr(for='dog_color') Dog model
+      input#dog_color(type='text', name='dog_color' class="form-control")  
+    div.form-group(class="mx-sm-5 mb-2")
+      label.laptopAttr(for='dog_cost') Dog cost
+      input#dog_cost(type='number', name='dog_cost' class="form-control")
+    input(type="submit" class="mx-sm-5 mb-2 btn btn-success")
+  script.
+    document.forms['DogForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) 
+      }).then((resp) => {
+        return resp.json(); 
+      }).then((body) => {
+        alert("Save succeded")
+      }).catch((error) => {
+        alert("Save failed " + error )
+      });
+    });
