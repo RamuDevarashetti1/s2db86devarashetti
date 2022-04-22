@@ -11,14 +11,15 @@ passport.use(new LocalStrategy(
     Account.findOne({ username: username }, function (err, user) {
     if (err) { return done(err); }
     if (!user) {
-      return done(null, false, { message: 'Incorrect username.' });
+    return done(null, false, { message: 'Incorrect username.' });
     }
     if (!user.validPassword(password)) {
-      return done(null, false, { message: 'Incorrect password.' });
+    return done(null, false, { message: 'Incorrect password.' });
     }
-      return done(null, user);
-    }
-  );
+    return done(null, user);
+    });
+  }));
+
 
 const connectionString = "mongodb+srv://admin:admin@cluster0.hxyu1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose = require('mongoose');
